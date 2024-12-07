@@ -83,7 +83,7 @@ void countEncoderPulse() {
 
 // Fungsi untuk menghitung RPM berdasarkan pulse encoder
 float calculateRPM() {
-    motorRPM = (encoderPulseCount / 11) * 60; 
+    motorRPM = (encoderPulseCount / 11) * 600; 
     adjustedRPM = motorRPM / gearboxRatio;    
     encoderPulseCount = 0;                    
     return adjustedRPM;
@@ -117,8 +117,8 @@ void setup() {
 void loop() {
     unsigned long currentTime = millis();
 
-    // Hitung kecepatan motor setiap 1000 ms
-    if (currentTime - previousTime >= 1000) {
+    // Hitung kecepatan motor setiap 100 ms
+    if (currentTime - previousTime >= 100) {
         calculateRPM();
         previousTime = currentTime;
         pidOutput = calculatePID();
